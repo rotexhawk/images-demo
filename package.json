@@ -1,31 +1,47 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-scripts": "3.1.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+    "name": "my-app",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "compress-images": "^1.5.8",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "express-fileupload": "^1.1.6-alpha.2",
+        "filepond": "^4.7.0",
+        "filepond-plugin-image-exif-orientation": "^1.0.6",
+        "filepond-plugin-image-preview": "^4.4.0",
+        "react": "^16.9.0",
+        "react-dom": "^16.9.0",
+        "react-filepond": "^7.0.1",
+        "react-scripts": "3.1.1"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "server": "nodemon --experimental-modules ./server/index.js"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "eslint": "^6.3.0",
+        "nodemon": "^1.19.2",
+        "prettier": "^1.18.2"
+    }
 }
