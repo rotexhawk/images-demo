@@ -63,7 +63,7 @@ function compressImage(rawImage) {
                     }
                 );
             } else {
-                // console.error(err);
+                console.error(err);
             }
         }
     );
