@@ -12,6 +12,8 @@
         "filepond": "^4.7.0",
         "filepond-plugin-image-exif-orientation": "^1.0.6",
         "filepond-plugin-image-preview": "^4.4.0",
+        "glob": "^7.1.4",
+        "image-size": "^0.7.4",
         "ramda": "^0.26.1",
         "react": "^16.9.0",
         "react-dom": "^16.9.0",

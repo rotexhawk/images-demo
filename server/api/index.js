@@ -1,16 +1,19 @@
 import express from 'express';
-import fileUpload from 'express-fileupload';
 import path from 'path';
+import fileUpload from 'express-fileupload';
 import compress_images from 'compress-images';
 import fs from 'fs';
 import sharp from 'sharp';
+import { promisify } from 'util';
 
+const compressImages = promisify(compress_images);
 const router = express.Router();
+
 router.use(fileUpload());
 
 router.get('/', (req, res) => res.send('Router path is loading'));
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     const file = req.files.filepond;
     const filePath = path.resolve('public/images/raw/', file.name);
 
@@ -19,8 +22,10 @@ router.post('/', (req, res) => {
             console.log('error happened', err);
             return res.status(500).send(err);
         }
-        generateImages(file.name);
-        generateSrcsets(file.name);
+        generateImages(file.name)
+            .then(() => generateSrcsets(file.name))
+            .catch(console.log);
+        //
         res.json({
             file: `${filePath}`,
         });
@@ -30,17 +35,18 @@ router.post('/', (req, res) => {
 function generateImages(rawImage) {
     const outputPath = path.join('public/images/optimized/');
     const inputPath = path.resolve('public/images/raw/', rawImage);
-
-    compressImage(inputPath, outputPath, {
+    return compressImage(inputPath, outputPath, {
         jpg: {
             engine: 'mozjpeg',
             command: ['-quality', '75', '-progressive'],
         },
-    });
-
-    compressImage(inputPath, outputPath, {
-        jpg: { engine: 'webp', command: ['-q', '75'] },
-    });
+    })
+        .then(
+            compressImage(inputPath, outputPath, {
+                jpg: { engine: 'webp', command: ['-q', '75'] },
+            })
+        )
+        .catch(console.log);
 }
 
 function compressImage(inputPath, outputPath, options) {
@@ -52,7 +58,7 @@ function compressImage(inputPath, outputPath, options) {
         jpg: options.jpg || noEngine,
     };
 
-    compress_images(
+    return compressImages(
         inputPath,
         outputPath,
         { compress_force: false, statistic: true, autoupdate: true },
@@ -60,10 +66,7 @@ function compressImage(inputPath, outputPath, options) {
         { jpg: options.jpg },
         { png: options.png },
         { svg: options.svg },
-        { gif: options.gif },
-        function(err) {
-            if (err) console.error(err);
-        }
+        { gif: options.gif }
     );
 }
 
@@ -108,7 +111,6 @@ function getWritableStream(filename, folderName) {
         filename
     );
 
-    console.log('should save here', outPath);
     return fs.createWriteStream(outPath);
 }
 
