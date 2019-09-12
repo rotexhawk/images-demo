@@ -78,6 +78,7 @@ function generateSrcsets(filename) {
 
 function generateSrcset(filename) {
     const sizes = {
+        placeholder: { width: 20 },
         thumb: { width: 200, height: 200 },
         phone_portrait: { width: 320 },
         phone_landscape: { width: 480 },
