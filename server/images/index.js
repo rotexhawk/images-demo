@@ -5,15 +5,37 @@ import sizeOf from 'image-size';
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    glob(path.resolve('public/images/', '**/*+(.jpg|.webp)'), function(
-        er,
-        files
-    ) {
-        console.log('list of files', files);
-        res.send(convertToImages(files));
+router.get('/', async (req, res) => {
+    const pattern = path.resolve('public/images/raw/', `*+(.jpg|.webp)`);
+    const allRawImages = await getImageFromDisk(null, pattern);
+    const allImages = await allRawImages.map(async image => {
+        const filename = image.substring(
+            image.lastIndexOf('/') + 1,
+            image.indexOf('.')
+        );
+        let allImageTypes = await getImageFromDisk(filename);
+        return convertToImages(allImageTypes);
     });
+    Promise.all(allImages).then(values => res.send(values));
 });
+
+router.get('/:filename', (req, res) => {
+    getImageFromDisk(req.params.filename).then(images =>
+        res.send(convertToImages(images))
+    );
+});
+
+function getImageFromDisk(filename, pattern) {
+    pattern =
+        pattern ||
+        path.resolve('public/images/', `**/${filename}+(.jpg|.webp)`);
+    return new Promise((resolve, reject) => {
+        glob(pattern, function(err, files) {
+            if (err) reject(err);
+            resolve(files);
+        });
+    });
+}
 
 function convertToImages(filenames) {
     return filenames.reduce((acc, filename) => {
