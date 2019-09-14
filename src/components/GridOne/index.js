@@ -5,6 +5,7 @@ import axios from 'axios';
 const Container = styled.div`
     display: flex;
     margin-top: 2rem;
+    margin-bottom: 2rem;
     flex-wrap: wrap;
     margin-left: -0.5rem;
     margin-right: -0.5rem;
