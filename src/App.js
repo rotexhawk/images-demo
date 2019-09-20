@@ -4,6 +4,7 @@ import FileUpload from './components/FileUpload';
 import GridOne from './components/GridOne';
 import GridTwo from './components/GridTwo';
 import GridThree from './components/GridThree';
+import GridFour from './components/GridFour';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -20,7 +21,7 @@ function App() {
             <div style={{ maxWidth: 900, margin: '0 auto', marginTop: '2rem' }}>
                 <FileUpload server="http://localhost:4000/api" />
             </div>
-            <GridThree />
+            <GridFour />
         </Container>
     );
 }
