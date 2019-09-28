@@ -29,4 +29,4 @@ COPY . .
 # Node Docker Good Defaults sample project on GitHub to change this Dockerfile for 
 # better local development with more advanced topics
 # https://github.com/BretFisher/node-docker-good-defaults
-CMD [ "/bin/bash", "yarn", "start" ]
+CMD ["yarn", "start" ]
