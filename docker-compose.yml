@@ -1,0 +1,17 @@
+version: '3.1'
+
+services:
+    node:
+        build:
+            context: .
+        command: yarn start
+        ports:
+            - '4000:4000'
+            - '3000:3000'
+        volumes:
+            - .:/usr/src/app:delegated
+            - ./package.json:/usr/src/app/package.json
+            - ./yarn.lock:/usr/src/app/yarn.lock
+            - notused:/usr/src/app/node_modules
+volumes:
+    notused:

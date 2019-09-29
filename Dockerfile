@@ -12,10 +12,10 @@ RUN mkdir -p /usr/src/app
 
 WORKDIR /usr/src/app
 # - Node uses a "package manager", so it needs to copy in package.json file
-COPY package.json package.json
+COPY package.json yarn.lock* ./
 # - then it needs to run 'npm install' to install dependencies from that file
 # - to keep it clean and small, run 'npm cache clean --force' after above
-RUN yarn
+RUN yarn install && yarn cache clean -f
 # - then it needs to copy in all files from current directory
 COPY . .
 # - then it needs to start container with command '/sbin/tini -- node ./bin/www'
