@@ -30,7 +30,7 @@ function getImageFromDisk(filename, pattern) {
         pattern ||
         path.resolve('public/images/', `**/${filename}+(.jpg|.webp)`);
     return new Promise((resolve, reject) => {
-        glob(pattern, function(err, files) {
+        glob(pattern, function (err, files) {
             if (err) reject(err);
             resolve(files);
         });
@@ -95,7 +95,7 @@ function toJsonObj(file, filename, extension, dimensions) {
 
 function toServerUrl(file) {
     const host = 'http://localhost:4000/';
-    const serverPath = '/Users/yasinyaqoobi/Sites/images-demo/';
+    const serverPath = '/mnt/c/users/yyaqoobi/sites/images-demo/';
     return file.replace(serverPath, host);
 }
 
