@@ -95,7 +95,7 @@ function toJsonObj(file, filename, extension, dimensions) {
 
 function toServerUrl(file) {
     const host = 'http://localhost:4000/';
-    const serverPath = '/mnt/c/users/yyaqoobi/sites/images-demo/';
+    const serverPath = './images-demo/';  //this might not work. Please add your absolute path. 
     return file.replace(serverPath, host);
 }
 
