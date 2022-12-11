@@ -8,7 +8,7 @@
         "body-parser": "^1.19.0",
         "compress-images": "^1.5.8",
         "cors": "^2.8.5",
-        "express": "^4.17.1",
+        "express": "^4.17.3",
         "express-fileupload": "^1.1.6-alpha.2",
         "filepond": "^4.7.0",
         "filepond-plugin-image-exif-orientation": "^1.0.6",
